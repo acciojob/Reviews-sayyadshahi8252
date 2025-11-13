@@ -10,3 +10,30 @@ button{
     justify-content: center;
     align-items: center;
 }
+.container {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.review {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.person-img {
+    background-size: contain;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+.prev-btn,
+.next-btn,
+.random-btn {
+  margin: 5px;
+  cursor: pointer;
+}

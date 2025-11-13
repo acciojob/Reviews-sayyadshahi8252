@@ -40,62 +40,50 @@ const reviews = [
             'Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ',
     },
 ];
-
 const Review = () => {
-    const [ index, setIndex ] = useState(0);
-    const { id, name, job, image, text } = reviews[ index ]
+  const [index, setIndex] = useState(0);
+  const { id, name, job, image, text } = reviews[index];
 
-    function handleprev() {
-        setIndex((index) => {
-            if (index != 0) {
-                let newindex = index - 1;
-                return newindex;
-            } else {
-                return index;
-            }
-        })
+  function handlePrev() {
+    setIndex((prevIndex) => (prevIndex - 1 + reviews.length) % reviews.length);
+  }
+
+
+  function handleNext() {
+    setIndex((prevIndex) => (prevIndex + 1) % reviews.length);
+  }
+
+  function handleRandom() {
+    let random = Math.floor(Math.random() * reviews.length);
+    while (random === index) {
+      random = Math.floor(Math.random() * reviews.length);
     }
-    function handlenext() {
-        setIndex((index) => {
-            if (index !== reviews.length - 1) {
-                let newindex = index + 1;
-                return newindex;
-            } else {
-                return index;
-            }
-        })
-    }
-    function handlerandom() {
-        let random = Math.floor(Math.random() * reviews.length);
-        while (random === index) {
-            random = Math.floor(Math.random() * reviews.length);
-        }
-        setIndex(random);
-    }
+    setIndex(random);
+  }
 
+  return (
+    <article className="review">
+      <div className="image-container">
+        <img src={image} className="person-img" alt={name} />
+      </div>
+      <h4 className="author" id={`author-${id}`}>
+        {name}
+      </h4>
+      <p className="job">{job}</p>
+      <p className="info">{text}</p>
+      <div className="button-container">
+        <button className="prev-btn" onClick={handlePrev}>
+          &lt;
+        </button>
+        <button className="next-btn" onClick={handleNext}>
+          &gt;
+        </button>
+        <button className="random-btn" onClick={handleRandom}>
+          surprise me
+        </button>
+      </div>
+    </article>
+  );
+};
 
-    return (
-        <article className="review">
-            <div className="image-container">
-                <img src={image} className="person-img" alt="image" />
-            </div>
-            <h4 className="author" id={`author-${id}`}>
-                {name}
-            </h4>
-            <p className="job">{job}</p>
-            <p className="info">{text}</p>
-            <div className="button-container">
-                <button className="prev-btn" onClick={handleprev}>
-                    &lt;
-                </button>
-                <button className="next-btn" onClick={handlenext}>
-                    &gt;
-                </button>
-                <button className="random-btn" onClick={handlerandom}>surprise me</button>
-            </div>
-
-        </article>
-    )
-}
-
-export default Review
+export default Review;
